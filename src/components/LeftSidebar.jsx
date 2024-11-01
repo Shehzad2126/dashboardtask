@@ -14,53 +14,51 @@ const LeftSidebar = () => {
   const tabs = [
     {
       name: "Dashboard",
-      icon: <GoHome style={{ width: "20px", height: "19.5px" }} />,
+      icon: <GoHome />,
     },
     {
       name: "Clients",
-      icon: <FaRegIdBadge style={{ width: "17px", height: "17px" }} />,
+      icon: <FaRegIdBadge />,
     },
     {
       name: "Proposals",
-      icon: <FaTags style={{ width: "23px", height: "18px" }} />,
+      icon: <FaTags />,
     },
     {
       name: "Projects",
-      icon: <FaUserFriends style={{ width: "21px", height: "21px" }} />,
+      icon: <FaUserFriends />,
     },
     {
       name: "Team",
-      icon: <PiImagesSquare style={{ width: "20px", height: "20px" }} />,
+      icon: <PiImagesSquare />,
     },
     {
       name: "Calendar",
-      icon: (
-        <IoCalendarClearOutline style={{ width: "17px", height: "17px" }} />
-      ),
+      icon: <IoCalendarClearOutline />,
     },
     {
       name: "Report",
-      icon: <BsGraphUpArrow style={{ width: "14px", height: "14px" }} />,
+      icon: <BsGraphUpArrow />,
     },
   ];
 
   return (
-    <div className="fixed flex flex-col justify-between h-full pt-5 pb-5 pr-5 bg-white shadow-lg">
-      <nav className="pt-10">
-        <ul className="space-y-3">
+    <div className="fixed flex flex-col justify-between h-full pt-5 pb-5 pr-5 bg-white ">
+      <nav className="pt-4">
+        <ul className="space-y-2">
           {tabs.map((tab) => (
             <li
               key={tab.name}
-              className={`flex items-center space-x-3 p-2 cursor-pointer ${
+              className={`flex items-center space-x-3 p-1 cursor-pointer ${
                 activeTab === tab.name
                   ? "bg-pink-100 text-teal-600 border-l-4 border-pink-600"
                   : "text-gray-700 hover:text-teal-600"
               }`}
               onClick={() => dispatch(setActiveTab(tab.name))}
             >
-              <span className="text-xl">{tab.icon}</span>
+              <span className="text-sm">{tab.icon}</span>
               <span
-                className={`font-medium ${
+                className={`text-xs font-semibold ${
                   activeTab === tab.name ? "text-teal-600" : ""
                 }`}
               >
@@ -70,33 +68,33 @@ const LeftSidebar = () => {
           ))}
         </ul>
       </nav>
-      <div className="mt-auto space-y-6">
+      <div className="mt-auto space-y-3">
         {/* Additional Icons */}
         <div className="flex justify-around text-2xl text-gray-700">
           <BiMessageSquareDetail
-            style={{ width: "20px", height: "20px" }}
+            style={{ width: "15px", height: "15px" }}
             className="cursor-pointer hover:text-teal-600"
           />
           <BiBell
-            style={{ width: "18px", height: "22px" }}
+            style={{ width: "15px", height: "15px" }}
             className="cursor-pointer hover:text-teal-600"
           />
           <BiHelpCircle
-            style={{ width: "21px", height: "21px" }}
+            style={{ width: "15px", height: "15px" }}
             className="cursor-pointer hover:text-teal-600"
           />
         </div>
 
         {/* User Profile */}
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center justify-center px-3 space-x-1">
           <img
             src="https://avatar.iran.liara.run/public/boy"
             alt="User"
-            className="w-10 h-10 rounded-full"
+            className="w-8 h-8 rounded-full"
           />
           <div>
-            <p className="font-medium text-gray-800">Unknown</p>
-            <p className="text-sm text-teal-600">unknown@gmail.com</p>
+            <p className="text-sm font-medium text-gray-800">Unknown</p>
+            <p className="text-xs text-teal-600">unknown@gmail.com</p>
           </div>
         </div>
       </div>

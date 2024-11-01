@@ -62,8 +62,8 @@ const CustomCalendar = () => {
   const weekDays = getWeekDays(currentDate);
 
   return (
-    <div className="w-full h-auto max-w-xs p-4 bg-white rounded-lg shadow-md">
-      <div className="flex items-center justify-between py-2 mb-2 text-gray-800">
+    <div className="w-full h-auto max-w-xs px-4 py-1 bg-white rounded-lg">
+      <div className="flex items-center justify-between py-1 mb-1 text-gray-800">
         <button onClick={handlePrevWeek}>
           <FaChevronLeft className="text-gray-500" />
         </button>
@@ -75,12 +75,12 @@ const CustomCalendar = () => {
             {currentDate.format("MMM")}
           </span>
           {showMonthDropdown && (
-            <div className="absolute left-0 z-10 mt-1 overflow-y-auto bg-white border rounded shadow-lg top-full max-h-40">
+            <div className="absolute left-0 z-10 overflow-y-auto bg-white border rounded shadow-lg top-full max-h-40">
               {months.map((month, index) => (
                 <div
                   key={month}
                   onClick={() => handleMonthSelect(index)}
-                  className="px-4 py-2 cursor-pointer hover:bg-teal-100"
+                  className="px-4 py-1 cursor-pointer hover:bg-teal-100"
                 >
                   {month}
                 </div>
@@ -94,12 +94,12 @@ const CustomCalendar = () => {
             {currentDate.format("YYYY")}
           </span>
           {showYearDropdown && (
-            <div className="absolute right-0 z-10 mt-1 overflow-y-auto bg-white border rounded shadow-lg top-full max-h-40">
+            <div className="absolute right-0 z-10 overflow-y-auto bg-white border rounded shadow-lg top-full max-h-40">
               {years.map((year) => (
                 <div
                   key={year}
                   onClick={() => handleYearSelect(year)}
-                  className="px-4 py-2 cursor-pointer hover:bg-teal-100"
+                  className="px-4 py-1 cursor-pointer hover:bg-teal-100"
                 >
                   {year}
                 </div>
@@ -113,7 +113,7 @@ const CustomCalendar = () => {
       </div>
 
       {/* Dates */}
-      <div className="flex justify-between py-2 mt-2 gap-x-1">
+      <div className="flex justify-between py-1 mt-1 gap-x-1">
         {weekDays.map((day) => (
           <div
             key={day.date()}
@@ -123,17 +123,17 @@ const CustomCalendar = () => {
                 : ""
             }`}
           >
-            <span className="py-3 mb-1 text-xs font-medium text-gray-500">
+            <span className="py-3 text-xs font-medium text-gray-500">
               {day.format("dd")[0]}
             </span>
             <button
               onClick={() => setSelectedDate(day.date())}
-              className={`flex items-center justify-center w-8 h-8 rounded-full text-sm ${
+              className={`flex items-center justify-center w-6 h-6 rounded-full text-sm ${
                 selectedDate === day.date() && currentDate.isSame(day, "month")
                   ? "bg-teal-600 text-white"
                   : day.isSame(today, "day")
                   ? "text-teal-600 bg-white"
-                  : "bg-gray-100 text-gray-800"
+                  : "bg-gray-200 text-gray-800"
               }`}
             >
               {day.date()}

@@ -20,20 +20,31 @@ const Dashboard = () => {
 
       <div className="flex items-start justify-between mb-8 space-x-6">
         <div
-          className="flex-1 w-2/3 p-6 mr-16 text-white rounded-lg "
+          className="flex-1 w-2/3 p-6 px-16 mr-16 text-white rounded-lg "
           style={{ backgroundColor: "rgba(16, 137, 143, 1)" }}
         >
           <h1 className="text-2xl font-bold">Hello, Jack</h1>
-          <p>7 new projects are waiting for you</p>
-          <div className="w-full h-2 mt-4 bg-gray-300 rounded-full">
-            <div
-              className="h-full bg-white rounded-full"
-              style={{ width: "80%" }}
-            ></div>
+          <div className="flex justify-between ">
+            <div>
+              <p>7 new projects are waiting for you</p>
+            </div>
+            <div>
+              <span>Status</span>
+            </div>
           </div>
-          <div className="flex justify-between mt-2">
-            <span>Status</span>
-            <span>120/127</span>
+          <div className="flex justify-between space-x-3">
+            <div
+              className="w-full h-2 mt-4 rounded-full"
+              style={{ background: "rgba(87, 187, 192, 1)" }}
+            >
+              <div
+                className="h-full bg-white rounded-full"
+                style={{ width: "80%" }}
+              ></div>
+            </div>
+            <div className="flex justify-between mt-2">
+              <span>120/127</span>
+            </div>
           </div>
         </div>
 

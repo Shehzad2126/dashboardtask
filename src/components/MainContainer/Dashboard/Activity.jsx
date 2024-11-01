@@ -22,13 +22,13 @@ const ActivityAndActiveNow = () => {
   return (
     <div className="flex ">
       {/* Activity Chart */}
-      <div className="w-6/12 rounded-lg ">
+      <div className="w-6/12 ">
         <ActivityChart />
       </div>
 
       {/* Active Now Section */}
       <div className="w-1/2 px-4 py-1 rounded-lg ">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-1">
           <h2 className="text-lg font-semibold">Active Now</h2>
           <a href="#" className="text-sm text-teal-600 hover:underline">
             View All &rarr;

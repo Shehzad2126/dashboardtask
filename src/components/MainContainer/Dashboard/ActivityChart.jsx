@@ -73,20 +73,15 @@ CustomTooltip.propTypes = {
 };
 
 const ActivityChart = () => (
-  <div className="max-w-md p-4 bg-white rounded-lg shadow">
-    <div className="flex mb-1">
-      <h3
-        className="text-lg font-semibold text-gray-800"
-        style={{ marginRight: "auto" }}
-      >
-        Activity
-      </h3>
-      <p className="text-gray-500">This Week</p>
+  <div className="max-w-md px-4 py-3 bg-white border border-neutral-200">
+    <div className="flex justify-between mb-0">
+      <h3 className="text-xs font-semibold text-gray-800 ">Activity</h3>
+      <p className="text-xs text-gray-500">This Week</p>
     </div>
-    <ResponsiveContainer width="100%" height={160}>
+    <ResponsiveContainer width="100%" height={150}>
       <LineChart
         data={data}
-        margin={{ top: 10, right: 20, left: 0, bottom: 10 }}
+        margin={{ top: 10, right: 10, left: 0, bottom: 1 }}
       >
         {/* Vertical Grid Lines Only */}
         <CartesianGrid vertical={true} horizontal={false} stroke="#e0e0e0" />

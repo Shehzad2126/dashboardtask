@@ -1,4 +1,104 @@
 import { FaClock } from "react-icons/fa";
+import styled from "styled-components";
+
+const Container = styled.div`
+  width: 100%;
+  padding: 1rem 1rem 0rem 1rem;
+  background-color: white;
+`;
+
+const Header = styled.div`
+  display: flex;
+  font-size: 0.8rem;
+  font-weight: bold;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+`;
+
+const ProgressContainer = styled.div`
+  width: 100%;
+  height: 0.5rem;
+  background-color: #e2e8f0;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+`;
+
+const ProgressBar = styled.div`
+  height: 100%;
+  background-color: #319795;
+  border-radius: 0.5rem;
+  width: ${(props) => props.progress}%;
+`;
+
+const TimeEstimate = styled.div`
+  display: flex;
+  font-size: 0.8rem;
+  align-items: center;
+  color: #4a5568;
+`;
+
+const TimeIcon = styled(FaClock)`
+  color: #319795;
+  margin-right: 0.5rem;
+`;
+
+const AvatarsContainer = styled.div`
+  display: flex;
+  gap: -1rem;
+`;
+
+const Avatar = styled.img`
+  width: 1.7rem;
+  height: 1.7rem;
+  border: 2px solid white;
+  border-radius: 50%;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+`;
+
+const Divider = styled.div`
+  width: 100%;
+  margin: 1.5rem 0;
+  border-top: 1px solid #e2e8f0;
+`;
+
+const TaskTitle = styled.h4`
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+`;
+
+const TaskList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+const TaskItem = styled.li`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+const TaskNumber = styled.div`
+  width: 1rem;
+  height: 1rem;
+  padding: 0.25rem;
+
+  background-color: #e2e8f0;
+  color: #2d3748;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+`;
+
+const TaskDescription = styled.span`
+  font-size: 0.775rem;
+
+  color: #2d3748;
+`;
 
 const TodayTask = () => {
   const progressPercentage = 90;
@@ -12,66 +112,48 @@ const TodayTask = () => {
   ];
 
   return (
-    <div className="w-full p-4 bg-white">
-      <div>
-        <div className="flex items-center justify-between mb-2">
-          <span className="font-medium text-gray-800">Progress</span>
-          <span className="font-semibold text-teal-600">
-            {progressPercentage}%
-          </span>
-        </div>
-
-        <div className="w-full h-2 mb-4 bg-gray-200 rounded-full">
-          <div
-            className="h-2 bg-teal-600 rounded-full"
-            style={{ width: `${progressPercentage}%` }}
-          ></div>
-        </div>
-
-        {/* Time Estimate and Avatars */}
-        <div className="flex items-center justify-between">
-          {/* Time Estimate */}
-          <div className="flex items-center text-gray-700">
-            <FaClock className="mr-2 text-teal-600" />
-            <span>{timeEstimate}</span>
-          </div>
-
-          {/* Avatars */}
-          <div className="flex -space-x-2">
-            {avatars.map((avatar, index) => (
-              <img
-                key={index}
-                src={avatar}
-                alt="User"
-                className="w-8 h-8 border-2 border-white rounded-full shadow"
-              />
-            ))}
-          </div>
-        </div>
-        <div className="w-full my-6 border-t border-gray-200"></div>
-        <h4 className="mb-4 text-lg font-semibold">Detail Task</h4>
-        <ul className="space-y-2">
-          <li className="flex items-center space-x-2">
-            <div className="w-6 h-6 text-sm text-center text-gray-800 bg-gray-200 rounded-full">
-              1
-            </div>
-            <span>Draft Remote Work Policy</span>
-          </li>
-          <li className="flex items-center space-x-2">
-            <div className="w-6 h-6 text-sm text-center text-gray-800 bg-gray-200 rounded-full">
-              2
-            </div>
-            <span>Review Legal and Compliance Requirements</span>
-          </li>
-          <li className="flex items-center space-x-2">
-            <div className="w-6 h-6 text-sm text-center text-gray-800 bg-gray-200 rounded-full">
-              3
-            </div>
-            <span>Conduct Employee Training on Remote Work Best Practices</span>
-          </li>
-        </ul>
+    <Container>
+      <Header>
+        <span className="text-gray-800 ">Progress</span>
+        <span style={{ color: "#319795", fontWeight: "400" }}>
+          {progressPercentage}%
+        </span>
+      </Header>
+      <ProgressContainer>
+        <ProgressBar progress={progressPercentage} />
+      </ProgressContainer>
+      <div className="flex items-center justify-between">
+        <TimeEstimate>
+          <TimeIcon />
+          <span>{timeEstimate}</span>
+        </TimeEstimate>
+        <AvatarsContainer>
+          {avatars.map((avatar, index) => (
+            <Avatar key={index} src={avatar} alt="User" />
+          ))}
+        </AvatarsContainer>
       </div>
-    </div>
+      <Divider />
+      <TaskTitle>Detail Task</TaskTitle>
+      <TaskList>
+        <TaskItem>
+          <TaskNumber>1</TaskNumber>
+          <TaskDescription>Draft Remote Work Policy</TaskDescription>
+        </TaskItem>
+        <TaskItem>
+          <TaskNumber>2</TaskNumber>
+          <TaskDescription>
+            Review Legal and Compliance Requirements
+          </TaskDescription>
+        </TaskItem>
+        <TaskItem>
+          <TaskNumber>3</TaskNumber>
+          <TaskDescription>
+            Conduct Employee Training on Remote Work Best Practices
+          </TaskDescription>
+        </TaskItem>
+      </TaskList>
+    </Container>
   );
 };
 

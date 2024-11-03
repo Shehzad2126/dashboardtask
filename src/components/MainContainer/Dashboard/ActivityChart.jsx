@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import PropTypes from "prop-types";
 import {
   LineChart,
@@ -19,6 +20,59 @@ const data = [
   { name: "S", projects: 9, tasks: 7 },
 ];
 
+// Styled Components
+const ChartContainer = styled.div`
+  max-width: 100%;
+  padding: 8px 16px;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+`;
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+`;
+
+const Title = styled.h3`
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #1f2937;
+`;
+
+const Subtitle = styled.p`
+  font-size: 0.75rem;
+  color: #6b7280;
+`;
+
+const CustomTooltipContainer = styled.div`
+  padding: 8px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
+
+const CustomTooltipRow = styled.div`
+  display: flex;
+  align-items: center;
+  color: ${(props) => props.color};
+  margin-top: ${(props) => (props.isFirst ? "0" : "4px")};
+
+  span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: ${(props) => props.color};
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+
+  p {
+    font-size: 0.875rem;
+  }
+`;
+
 // Custom Tooltip to show both tasks and projects
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
@@ -26,41 +80,20 @@ const CustomTooltip = ({ active, payload }) => {
     const projectData = payload.find((item) => item.dataKey === "projects");
 
     return (
-      <div
-        className="p-2 rounded-lg shadow-md"
-        style={{ backgroundColor: "#fff", border: "1px solid #e0e0e0" }}
-      >
+      <CustomTooltipContainer>
         {taskData && (
-          <div className="flex items-center" style={{ color: "#10898F" }}>
-            <span
-              style={{
-                display: "inline-block",
-                width: "8px",
-                height: "8px",
-                backgroundColor: "#10898F",
-                borderRadius: "50%",
-                marginRight: "5px",
-              }}
-            ></span>
-            <p className="text-sm">{`${taskData.value} Tasks`}</p>
-          </div>
+          <CustomTooltipRow color="#10898F" isFirst>
+            <span></span>
+            <p>{`${taskData.value} Tasks`}</p>
+          </CustomTooltipRow>
         )}
         {projectData && (
-          <div className="flex items-center mt-1" style={{ color: "#C72C88" }}>
-            <span
-              style={{
-                display: "inline-block",
-                width: "8px",
-                height: "8px",
-                backgroundColor: "#C72C88",
-                borderRadius: "50%",
-                marginRight: "5px",
-              }}
-            ></span>
-            <p className="text-sm">{`${projectData.value} Projects`}</p>
-          </div>
+          <CustomTooltipRow color="#C72C88">
+            <span></span>
+            <p>{`${projectData.value} Projects`}</p>
+          </CustomTooltipRow>
         )}
-      </div>
+      </CustomTooltipContainer>
     );
   }
   return null;
@@ -73,38 +106,32 @@ CustomTooltip.propTypes = {
 };
 
 const ActivityChart = () => (
-  <div className="max-w-md px-4 py-3 bg-white border border-neutral-200">
-    <div className="flex justify-between mb-0">
-      <h3 className="text-xs font-semibold text-gray-800 ">Activity</h3>
-      <p className="text-xs text-gray-500">This Week</p>
-    </div>
-    <ResponsiveContainer width="100%" height={140}>
-      <LineChart data={data} margin={{ top: 10, right: 5, left: 0, bottom: 1 }}>
-        {/* Vertical Grid Lines Only */}
+  <ChartContainer>
+    <Header>
+      <Title>Activity</Title>
+      <Subtitle>This Week</Subtitle>
+    </Header>
+    <ResponsiveContainer width="100%" height={110}>
+      <LineChart
+        data={data}
+        margin={{ top: 0, right: 0, left: -35, bottom: 1 }}
+      >
         <CartesianGrid vertical={true} horizontal={false} stroke="#e0e0e0" />
-
-        {/* X-Axis */}
         <XAxis
           dataKey="name"
           tickLine={false}
           axisLine={false}
           tick={{ fill: "#6B7280" }}
         />
-
-        {/* Y-Axis */}
         <YAxis
-          domain={[10, 30]} // Real data range as 10, 20, 30
-          ticks={[10, 20, 30]} // Real data points
-          tickFormatter={(value) => value / 10} // Display as 1, 2, 3
+          domain={[10, 30]}
+          ticks={[10, 20, 30]}
+          tickFormatter={(value) => value / 10}
           axisLine={false}
           tickLine={false}
           tick={{ fill: "#6B7280" }}
         />
-
-        {/* Tooltip */}
         <Tooltip content={<CustomTooltip />} />
-
-        {/* Projects (Pink Line) */}
         <Line
           type="linear"
           dataKey="projects"
@@ -115,10 +142,13 @@ const ActivityChart = () => (
               ? { r: 5, fill: "#fff", strokeWidth: 2, stroke: "#C72C88" }
               : false
           }
-          activeDot={{ r: 5, strokeWidth: 1, fill: "#C72C88", stroke: "#fff" }}
+          activeDot={{
+            r: 5,
+            strokeWidth: 1,
+            fill: "#C72C88",
+            stroke: "#fff",
+          }}
         />
-
-        {/* Tasks (Teal Line) */}
         <Line
           type="linear"
           dataKey="tasks"
@@ -129,11 +159,16 @@ const ActivityChart = () => (
               ? { r: 5, fill: "#fff", strokeWidth: 2, stroke: "#10898F" }
               : false
           }
-          activeDot={{ r: 5, strokeWidth: 3, fill: "#10898F", stroke: "#fff" }}
+          activeDot={{
+            r: 5,
+            strokeWidth: 3,
+            fill: "#10898F",
+            stroke: "#fff",
+          }}
         />
       </LineChart>
     </ResponsiveContainer>
-  </div>
+  </ChartContainer>
 );
 
 export default ActivityChart;

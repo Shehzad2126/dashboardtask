@@ -63,7 +63,7 @@ const CustomCalendar = () => {
 
   return (
     <div className="w-full h-auto max-w-xs px-4 py-1 bg-white rounded-lg">
-      <div className="flex items-center justify-between py-1 mb-1 text-gray-800">
+      <div className="flex items-center justify-between mb-1 text-gray-800 py-">
         <button onClick={handlePrevWeek}>
           <FaChevronLeft className="text-gray-500" />
         </button>

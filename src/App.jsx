@@ -1,6 +1,6 @@
 // import React from "react";
 import LeftSidebar from "./components/LeftSidebar";
-import MainContainer from "./components/MainContainer/MainContainer";
+import MainContent from "./components/MainContainer/MainContent";
 // import RightSidebar from "./components/RightSidebar";
 
 const App = () => (
@@ -8,8 +8,8 @@ const App = () => (
     <div className="w-2/12">
       <LeftSidebar />
     </div>
-    <div className="w-10/12">
-      <MainContainer />
+    <div className="w-10/12 bg-customGray">
+      <MainContent />
     </div>
   </div>
 );

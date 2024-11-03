@@ -1,12 +1,18 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import styled from "styled-components";
 import Dashboard from "./Dashboard";
 import Client from "./Clients";
 import Projects from "./Projects";
-import Poposal from "./Proposal";
+import Proposal from "./Proposal";
 import Reports from "./Reports";
 import Team from "./Team";
-import Calender from "./Calender";
+import Calendar from "./Calender";
+
+const ContentContainer = styled.div`
+  flex-grow: 1;
+  overflow-y: auto;
+`;
 
 const MainContent = () => {
   const activeTab = useSelector((state) => state.tab.activeTab);
@@ -18,13 +24,13 @@ const MainContent = () => {
       case "Clients":
         return <Client />;
       case "Proposals":
-        return <Poposal />;
+        return <Proposal />;
       case "Projects":
         return <Projects />;
       case "Team":
         return <Team />;
       case "Calendar":
-        return <Calender />;
+        return <Calendar />;
       case "Report":
         return <Reports />;
       default:
@@ -33,10 +39,10 @@ const MainContent = () => {
   };
 
   return (
-    <div className="flex-grow overflow-y-auto">
-      {/* <h1 className="mb-4 text-2xl font-semibold">{activeTab}</h1> */}
+    <ContentContainer>
+      {/* Content rendered based on activeTab */}
       {renderContent()}
-    </div>
+    </ContentContainer>
   );
 };
 

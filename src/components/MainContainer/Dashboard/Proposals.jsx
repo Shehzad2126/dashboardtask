@@ -1,6 +1,5 @@
-// import React from "react";
+import styled from "styled-components";
 
-// Sample proposal data with images, titles, and descriptions
 const proposals = [
   {
     id: 1,
@@ -22,30 +21,75 @@ const proposals = [
   },
 ];
 
+const Container = styled.div`
+  padding: 1.5rem;
+`;
+
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.1rem;
+`;
+
+const Title = styled.h2`
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: #2d3748;
+`;
+
+const ViewAllButton = styled.button`
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #4a5568;
+  &:hover {
+    color: #2d3748;
+  }
+`;
+
+const Grid = styled.div`
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+`;
+
+const ProposalCard = styled.div`
+  position: relative;
+  padding: 0.35rem;
+  width: 215px;
+  height: 316px;
+`;
+
+const ProposalImage = styled.img`
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+`;
+
 const ProposalsSection = () => (
-  <div className="p-6">
-    <div className="flex items-center justify-between mb-4 mt-7">
-      <h2 className="text-xl font-semibold text-gray-800">Your Proposals</h2>
-      <button className="flex items-center text-sm text-gray-600 hover:text-gray-800">
-        View All <span className="ml-1">→</span>
-      </button>
-    </div>
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+  <Container>
+    <Header>
+      <Title>Your Proposals</Title>
+      <ViewAllButton>
+        View All <span style={{ marginLeft: "0.25rem" }}>→</span>
+      </ViewAllButton>
+    </Header>
+    <Grid>
       {proposals.map((proposal) => (
-        <div
-          key={proposal.id}
-          className="relative p-3 "
-          style={{ width: "215px", height: "316px" }}
-        >
-          <img
-            src={proposal.image}
-            alt={proposal.title}
-            className="object-cover w-full h-full"
-          />
-        </div>
+        <ProposalCard key={proposal.id}>
+          <ProposalImage src={proposal.image} alt={proposal.title} />
+        </ProposalCard>
       ))}
-    </div>
-  </div>
+    </Grid>
+  </Container>
 );
 
 export default ProposalsSection;

@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import { GoHome } from "react-icons/go";
 import { PiImagesSquare } from "react-icons/pi";
 import { IoCalendarClearOutline } from "react-icons/io5";
@@ -7,98 +8,151 @@ import { BiMessageSquareDetail, BiBell, BiHelpCircle } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveTab } from "../store/tabSlice";
 
+const SidebarContainer = styled.div`
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 1.25rem 1.25rem 1.25rem 0;
+  background-color: white;
+`;
+
+const Nav = styled.nav`
+  padding-top: 1rem;
+`;
+
+const TabList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+const TabItem = styled.li`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.25rem;
+  cursor: pointer;
+  background-color: ${({ active }) => (active ? "#ffe4e6" : "transparent")};
+  color: ${({ active }) => (active ? "#319795" : "#4a5568")};
+  border-left: ${({ active }) => (active ? "4px solid #d53f8c" : "none")};
+  font-size: 0.75rem;
+
+  &:hover {
+    color: #319795;
+  }
+`;
+
+const TabIcon = styled.span`
+  font-size: 0.875rem;
+`;
+
+const TabText = styled.span`
+  font-weight: 600;
+`;
+
+const Footer = styled.div`
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+`;
+
+const IconContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.25rem;
+  color: #4a5568;
+
+  & > svg {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+
+    &:hover {
+      color: #319795;
+    }
+  }
+`;
+
+const UserProfile = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.75rem;
+  gap: 0.25rem;
+`;
+
+const UserImage = styled.img`
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+`;
+
+const UserInfo = styled.div`
+  text-align: left;
+`;
+
+const UserName = styled.p`
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #2d3748;
+`;
+
+const UserEmail = styled.p`
+  font-size: 0.75rem;
+  color: #319795;
+`;
+
 const LeftSidebar = () => {
   const dispatch = useDispatch();
   const activeTab = useSelector((state) => state.tab.activeTab);
 
   const tabs = [
-    {
-      name: "Dashboard",
-      icon: <GoHome />,
-    },
-    {
-      name: "Clients",
-      icon: <FaRegIdBadge />,
-    },
-    {
-      name: "Proposals",
-      icon: <FaTags />,
-    },
-    {
-      name: "Projects",
-      icon: <FaUserFriends />,
-    },
-    {
-      name: "Team",
-      icon: <PiImagesSquare />,
-    },
-    {
-      name: "Calendar",
-      icon: <IoCalendarClearOutline />,
-    },
-    {
-      name: "Report",
-      icon: <BsGraphUpArrow />,
-    },
+    { name: "Dashboard", icon: <GoHome /> },
+    { name: "Clients", icon: <FaRegIdBadge /> },
+    { name: "Proposals", icon: <FaTags /> },
+    { name: "Projects", icon: <FaUserFriends /> },
+    { name: "Team", icon: <PiImagesSquare /> },
+    { name: "Calendar", icon: <IoCalendarClearOutline /> },
+    { name: "Report", icon: <BsGraphUpArrow /> },
   ];
 
   return (
-    <div className="fixed flex flex-col justify-between h-full pt-5 pb-5 pr-5 bg-white ">
-      <nav className="pt-4">
-        <ul className="space-y-2">
+    <SidebarContainer>
+      <Nav>
+        <TabList>
           {tabs.map((tab) => (
-            <li
+            <TabItem
               key={tab.name}
-              className={`flex items-center space-x-3 p-1 cursor-pointer ${
-                activeTab === tab.name
-                  ? "bg-pink-100 text-teal-600 border-l-4 border-pink-600"
-                  : "text-gray-700 hover:text-teal-600"
-              }`}
+              active={activeTab === tab.name}
               onClick={() => dispatch(setActiveTab(tab.name))}
             >
-              <span className="text-sm">{tab.icon}</span>
-              <span
-                className={`text-xs font-semibold ${
-                  activeTab === tab.name ? "text-teal-600" : ""
-                }`}
-              >
-                {tab.name}
-              </span>
-            </li>
+              <TabIcon>{tab.icon}</TabIcon>
+              <TabText>{tab.name}</TabText>
+            </TabItem>
           ))}
-        </ul>
-      </nav>
-      <div className="mt-auto space-y-3">
-        {/* Additional Icons */}
-        <div className="flex justify-around text-2xl text-gray-700">
-          <BiMessageSquareDetail
-            style={{ width: "15px", height: "15px" }}
-            className="cursor-pointer hover:text-teal-600"
-          />
-          <BiBell
-            style={{ width: "15px", height: "15px" }}
-            className="cursor-pointer hover:text-teal-600"
-          />
-          <BiHelpCircle
-            style={{ width: "15px", height: "15px" }}
-            className="cursor-pointer hover:text-teal-600"
-          />
-        </div>
-
-        {/* User Profile */}
-        <div className="flex items-center justify-center px-3 space-x-1">
-          <img
+        </TabList>
+      </Nav>
+      <Footer>
+        <IconContainer>
+          <BiMessageSquareDetail />
+          <BiBell />
+          <BiHelpCircle />
+        </IconContainer>
+        <UserProfile>
+          <UserImage
             src="https://avatar.iran.liara.run/public/boy"
             alt="User"
-            className="w-8 h-8 rounded-full"
           />
-          <div>
-            <p className="text-sm font-medium text-gray-800">Unknown</p>
-            <p className="text-xs text-teal-600">unknown@gmail.com</p>
-          </div>
-        </div>
-      </div>
-    </div>
+          <UserInfo>
+            <UserName>Unknown</UserName>
+            <UserEmail>unknown@gmail.com</UserEmail>
+          </UserInfo>
+        </UserProfile>
+      </Footer>
+    </SidebarContainer>
   );
 };
 

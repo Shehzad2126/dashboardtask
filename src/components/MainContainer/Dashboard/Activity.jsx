@@ -1,9 +1,120 @@
 import ActivityChart from "./ActivityChart";
+import styled from "styled-components";
 
-// import { FiChevronDown } from "react-icons/fi";
+const Container = styled.div`
+  display: flex;
+`;
+
+const ChartWrapper = styled.div`
+  width: 55%;
+  background: black;
+`;
+
+const ActiveNowSection = styled.div`
+  width: 45%;
+  padding: 1rem 1rem;
+  border-radius: 0.75rem;
+`;
+
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+`;
+
+const Title = styled.h2`
+  font-size: 0.8rem;
+  font-weight: 600;
+`;
+
+const ViewAllLink = styled.a`
+  font-size: 0.8rem;
+  color: #38b2ac;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const UserList = styled.div`
+  max-width: 18rem;
+  padding-left: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+`;
+
+const UserCard = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.3rem 1rem;
+  padding-left: 1.25rem;
+  background-color: white;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 0.75rem;
+`;
+
+const UserImageContainer = styled.div`
+  position: relative;
+  margin-right: 0.75rem;
+  margin-left: -3rem;
+`;
+
+const UserImage = styled.img`
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+`;
+
+const OnlineIndicator = styled.span`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: #38b2ac;
+  border: 2px solid white;
+  border-radius: 50%;
+  transform: translate(25%, -25%);
+  z-index: 10;
+`;
+
+const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const UserName = styled.p`
+  font-size: 0.825rem;
+  font-weight: 400;
+  color: #2d3748;
+`;
+
+const UserRole = styled.p`
+  font-size: 0.675rem;
+  color: #718096;
+`;
+
+const TimeSpentInfo = styled.div`
+  text-align: right;
+`;
+
+const TimeSpent = styled.p`
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: #d53f8c;
+`;
+
+const TimeSpentLabel = styled.p`
+  font-size: 0.55rem;
+  color: #ed64a6;
+`;
 
 const ActivityAndActiveNow = () => {
-  // Sample data for "Active Now" section
   const activeUsers = [
     {
       name: "Ryan Thompson",
@@ -20,54 +131,37 @@ const ActivityAndActiveNow = () => {
   ];
 
   return (
-    <div className="flex ">
-      {/* Activity Chart */}
-      <div className="w-6/12 ">
+    <Container>
+      <ChartWrapper>
         <ActivityChart />
-      </div>
-
-      {/* Active Now Section */}
-      <div className="w-1/2 px-4 py-1 rounded-lg ">
-        <div className="flex items-center justify-between mb-1">
-          <h2 className="text-lg font-semibold">Active Now</h2>
-          <a href="#" className="text-sm text-teal-600 hover:underline">
-            View All &rarr;
-          </a>
-        </div>
-        <div className="max-w-xs space-y-4 pl-7">
+      </ChartWrapper>
+      <ActiveNowSection>
+        <Header>
+          <Title>Active Now</Title>
+          <ViewAllLink href="#">View All &rarr;</ViewAllLink>
+        </Header>
+        <UserList>
           {activeUsers.map((user, index) => (
-            <div
-              key={index}
-              className="relative flex items-center justify-between p-4 pl-5 bg-white shadow-sm rounded-xl"
-            >
+            <UserCard key={index}>
               <div className="flex items-center">
-                <div className="relative mr-3 -ml-12">
-                  <img
-                    src={user.image}
-                    alt={user.name}
-                    className="w-12 h-12 border rounded-full shadow-md"
-                  />
-                  <span
-                    className="absolute top-0 right-0 w-3 h-3 bg-teal-500 border-2 border-white rounded-full"
-                    style={{ transform: "translate(25%, -25%)", zIndex: 10 }}
-                  ></span>
-                </div>
-                <div>
-                  <p className="font-semibold text-gray-800">{user.name}</p>
-                  <p className="text-sm text-gray-500">{user.role}</p>
-                </div>
+                <UserImageContainer>
+                  <UserImage src={user.image} alt={user.name} />
+                  <OnlineIndicator />
+                </UserImageContainer>
+                <UserInfo>
+                  <UserName>{user.name}</UserName>
+                  <UserRole>{user.role}</UserRole>
+                </UserInfo>
               </div>
-              <div className="text-right">
-                <p className="text-lg font-semibold text-pink-600">
-                  {user.timeSpent}
-                </p>
-                <p className="text-xs text-pink-400">Time Spent</p>
-              </div>
-            </div>
+              <TimeSpentInfo>
+                <TimeSpent>{user.timeSpent}</TimeSpent>
+                <TimeSpentLabel>Time Spent</TimeSpentLabel>
+              </TimeSpentInfo>
+            </UserCard>
           ))}
-        </div>
-      </div>
-    </div>
+        </UserList>
+      </ActiveNowSection>
+    </Container>
   );
 };
 

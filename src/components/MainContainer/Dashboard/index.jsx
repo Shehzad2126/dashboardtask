@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import StatCard from "./StatCard";
 import { FaTasks, FaProjectDiagram, FaDollarSign } from "react-icons/fa";
 import Activity from "./Activity";
@@ -5,57 +6,165 @@ import SearchField from "./SearchField";
 import TodayTask from "./TodayTask";
 import Proposals from "./Proposals";
 import CalendarComponent from "./CalendarComponent";
+
+const DashboardContainer = styled.div`
+  padding-top: 0.25rem;
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+`;
+
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+const Title = styled.h1`
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+`;
+
+const SearchContainer = styled.div`
+  width: 45%;
+  padding-left: 5rem;
+`;
+
+const MainContent = styled.div`
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+`;
+
+const WelcomeCard = styled.div`
+  flex: 1;
+  padding: 0.5rem 2.5rem;
+  margin-right: 4rem;
+  background-color: rgba(16, 137, 143, 1);
+  border-radius: 0.5rem;
+  color: white;
+  width: 56.4%;
+`;
+
+const StatusText = styled.div`
+  font-size: 0.75rem;
+  color: #ffffff;
+`;
+
+const ProgressBarContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+`;
+
+const ProgressBar = styled.div`
+  width: 100%;
+  height: 0.25rem;
+  margin-top: 0.5rem;
+  background-color: rgba(87, 187, 192, 1);
+  border-radius: 0.25rem;
+`;
+
+const Progress = styled.div`
+  height: 100%;
+  background-color: white;
+  border-radius: 0.25rem;
+  width: 80%;
+`;
+
+const CalendarWrapper = styled.div`
+  width: 31.33%;
+  margin-left: 2.5rem;
+`;
+
+const StatsSection = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+const LeftSection = styled.div`
+  width: 66.67%;
+`;
+
+const StatCardsWrapper = styled.div`
+  display: flex;
+  justify-content: start;
+  padding-right: 3rem;
+`;
+
+const RightSection = styled.div`
+  width: 50%;
+  padding: 1rem 1rem 0rem 1rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  margin-left: 1.25rem;
+`;
+
+const TaskImage = styled.img`
+  width: 100%;
+  height: 10rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+`;
+
+const TaskTitle = styled.h4`
+  font-size: 0.85rem;
+  font-weight: 600;
+`;
+
+const TaskDescription = styled.p`
+  font-size: 0.675rem;
+  color: #718096;
+`;
+
 const Dashboard = () => {
   return (
-    <div className="py-1 pl-6 space-y-1 ">
-      <div className="flex items-center justify-between w-full ">
-        <div className="w-2/3">
-          <h1 className="text-xl font-semibold text-gray-800">Dashboard</h1>
+    <DashboardContainer>
+      <Header>
+        <div style={{ width: "66.67%" }}>
+          <Title>Dashboard</Title>
         </div>
 
-        <div className="w-1/2 pl-20 ">
+        <SearchContainer>
           <SearchField />
-        </div>
-      </div>
+        </SearchContainer>
+      </Header>
 
-      <div className="flex items-start justify-between mb-4 space-x-6">
-        <div
-          className="flex-1 w-2/3 p-4 px-16 mr-16 text-white rounded-lg "
-          style={{ backgroundColor: "rgba(16, 137, 143, 1)", width: "56.4%" }}
-        >
+      <MainContent>
+        <WelcomeCard>
           <h1 className="text-lg font-bold">Hello, Jack</h1>
           <div className="flex justify-between ">
             <div>
-              <p className="text-xs">7 new projects are waiting for you</p>
+              <StatusText>7 new projects are waiting for you</StatusText>
             </div>
             <div>
-              <span className="text-xs">Status</span>
+              <StatusText>Status</StatusText>
             </div>
           </div>
-          <div className="flex justify-between space-x-3">
-            <div
-              className="w-full h-1 mt-2 rounded-full"
-              style={{ background: "rgba(87, 187, 192, 1)" }}
-            >
-              <div
-                className="h-full bg-white rounded-full"
-                style={{ width: "80%" }}
-              ></div>
-            </div>
+          <ProgressBarContainer>
+            <ProgressBar>
+              <Progress />
+            </ProgressBar>
             <div className="flex justify-between mt-0">
-              <span className="text-xs">120/127</span>
+              <StatusText>120/127</StatusText>
             </div>
-          </div>
-        </div>
+          </ProgressBarContainer>
+        </WelcomeCard>
 
-        <div className="w-1/3 ml-10 border-l-indigo-600">
+        <CalendarWrapper>
           <CalendarComponent />
-        </div>
-      </div>
+        </CalendarWrapper>
+      </MainContent>
 
-      <div className="flex justify-between w-full">
-        <div className="w-2/3 ">
-          <div className="flex justify-center pr-12 ">
+      <StatsSection>
+        <LeftSection>
+          <StatCardsWrapper>
             <StatCard
               title="Today's Tasks"
               value={15}
@@ -77,31 +186,34 @@ const Dashboard = () => {
               icon={<FaDollarSign />}
               color="rgba(16, 137, 143, 1)"
             />
-          </div>
-          <div className="min-h-screen py-3">
+          </StatCardsWrapper>
+          <div style={{ minHeight: "100vh", paddingTop: "0.75rem" }}>
             <Activity />
             <Proposals />
           </div>
-          <div className="min-h-screen "></div>
-        </div>
-        <div className="w-1/2">
-          <div className="p-4 mx-5 bg-white rounded-lg ">
-            <h3 className="mb-4 font-semibold">Task Today</h3>
-            <img
-              src="https://s3-alpha-sig.figma.com/img/c646/cd8c/9e05cf0339e081b33cfa12c1b8e20492?Expires=1731283200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QW1uEJSIN77sAdYuFXV3j4mEQLIVKfEtDXKo3ozBnYP8zXEIfAxtn0kdVT37-womohDpma6SPdiW346mwMqmnXSUNw58fZ03ymde8eVDgEmSsi3kBWZtaY7BqeIrc2OsNkz-YmPEIolf-grET3eVL~XiERh6~GI6Bn9yfLK7SBOiJdujEbTIRpXnAd~yLBYjP-EolYgaQvYs0EApQNluNkhPXPQcsD2nQY~vdu7HyKZTP7GtUU9kV8ynOUziCgW1loAcemcqHtIxPam11jIOheNETARVpEC99pd8BLmHAyWCoEKd1ptYvpZ3gbnmYPMd-lsCkB3TIJ7c8I~U-eixDw__"
-              alt="Task"
-              className="w-full mb-4 rounded-lg h-52"
-            />
-            <h4 className="text-lg font-semibold">
-              IMPLEMENT Remote Work Policy
-            </h4>
-            <p className="text-sm text-gray-500">Workforce Planning Analyst</p>
+        </LeftSection>
 
-            <TodayTask />
-          </div>
-        </div>
-      </div>
-    </div>
+        <RightSection>
+          <h3
+            style={{
+              marginBottom: "0.4rem",
+              fontSize: ".85rem",
+              fontWeight: 600,
+            }}
+          >
+            Task Today
+          </h3>
+          <TaskImage
+            src="https://s3-alpha-sig.figma.com/img/c646/cd8c/9e05cf0339e081b33cfa12c1b8e20492?Expires=1731283200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QW1uEJSIN77sAdYuFXV3j4mEQLIVKfEtDXKo3ozBnYP8zXEIfAxtn0kdVT37-womohDpma6SPdiW346mwMqmnXSUNw58fZ03ymde8eVDgEmSsi3kBWZtaY7BqeIrc2OsNkz-YmPEIolf-grET3eVL~XiERh6~GI6Bn9yfLK7SBOiJdujEbTIRpXnAd~yLBYjP-EolYgaQvYs0EApQNluNkhPXPQcsD2nQY~vdu7HyKZTP7GtUU9kV8ynOUziCgW1loAcemcqHtIxPam11jIOheNETARVpEC99pd8BLmHAyWCoEKd1ptYvpZ3gbnmYPMd-lsCkB3TIJ7c8I~U-eixDw__"
+            alt="Task"
+          />
+          <TaskTitle>IMPLEMENT Remote Work Policy</TaskTitle>
+          <TaskDescription>Workforce Planning Analyst</TaskDescription>
+
+          <TodayTask />
+        </RightSection>
+      </StatsSection>
+    </DashboardContainer>
   );
 };
 

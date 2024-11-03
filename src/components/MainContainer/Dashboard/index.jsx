@@ -10,6 +10,7 @@ import CalendarComponent from "./CalendarComponent";
 const DashboardContainer = styled.div`
   padding-top: 0.25rem;
   padding-left: 1.5rem;
+  padding-right: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;

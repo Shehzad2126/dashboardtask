@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { IoIosArrowDown } from "react-icons/io";
 import PropTypes from "prop-types";
 import {
   LineChart,
@@ -109,7 +110,12 @@ const ActivityChart = () => (
   <ChartContainer>
     <Header>
       <Title>Activity</Title>
-      <Subtitle>This Week</Subtitle>
+      <Subtitle>
+        <div className="flex items-center">
+          This Week
+          <IoIosArrowDown />
+        </div>
+      </Subtitle>
     </Header>
     <ResponsiveContainer width="100%" height={110}>
       <LineChart

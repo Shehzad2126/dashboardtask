@@ -78,11 +78,8 @@ const ActivityChart = () => (
       <h3 className="text-xs font-semibold text-gray-800 ">Activity</h3>
       <p className="text-xs text-gray-500">This Week</p>
     </div>
-    <ResponsiveContainer width="100%" height={150}>
-      <LineChart
-        data={data}
-        margin={{ top: 10, right: 10, left: 0, bottom: 1 }}
-      >
+    <ResponsiveContainer width="100%" height={140}>
+      <LineChart data={data} margin={{ top: 10, right: 5, left: 0, bottom: 1 }}>
         {/* Vertical Grid Lines Only */}
         <CartesianGrid vertical={true} horizontal={false} stroke="#e0e0e0" />
 
@@ -118,7 +115,7 @@ const ActivityChart = () => (
               ? { r: 5, fill: "#fff", strokeWidth: 2, stroke: "#C72C88" }
               : false
           }
-          activeDot={{ r: 6, strokeWidth: 3, fill: "#C72C88", stroke: "#fff" }}
+          activeDot={{ r: 5, strokeWidth: 1, fill: "#C72C88", stroke: "#fff" }}
         />
 
         {/* Tasks (Teal Line) */}
@@ -132,7 +129,7 @@ const ActivityChart = () => (
               ? { r: 5, fill: "#fff", strokeWidth: 2, stroke: "#10898F" }
               : false
           }
-          activeDot={{ r: 6, strokeWidth: 3, fill: "#10898F", stroke: "#fff" }}
+          activeDot={{ r: 5, strokeWidth: 3, fill: "#10898F", stroke: "#fff" }}
         />
       </LineChart>
     </ResponsiveContainer>

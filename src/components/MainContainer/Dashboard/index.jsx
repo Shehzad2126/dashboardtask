@@ -103,7 +103,9 @@ const RightSection = styled.div`
   width: 50%;
   padding: 1rem 1rem 0rem 1rem;
   background-color: white;
-  border-radius: 0.5rem;
+  height:100vh;
+  margin-bottom: -50px
+  border-radius: 0.9rem;
   margin-left: 1.25rem;
 `;
 
@@ -194,7 +196,7 @@ const Dashboard = () => {
           </div>
         </LeftSection>
 
-        <RightSection>
+        <RightSection className="rounded-lg">
           <h3
             style={{
               marginBottom: "0.4rem",
